@@ -4,7 +4,7 @@ export default function ProfilePage() {
     return ( 
         <>
             <article className="block">
-                <p> Hi!</p>
+                <p> Hi this is the profile page!</p>
             </article>
     </>
     );
