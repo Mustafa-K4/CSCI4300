@@ -1,0 +1,6 @@
+.App-header {
+    background-color: #E7625F;
+    height: 90px;
+    display: flex;
+    justify-content: space-between; 
+}
