@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Header() {
 
-    return <header className="App-header">
+    return <header className="App-header fixed top-0 w-full">
         <div className="flex items-center justify-center w-1/8">
             <img src="/logo.jpeg" className="h-[80px] rounded-full shadow-md" alt="logo" />
         </div>
