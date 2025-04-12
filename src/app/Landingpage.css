@@ -1,0 +1,8 @@
+.Landing-Page {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 80vw;
+    border-radius: 10px;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.1);
+}
