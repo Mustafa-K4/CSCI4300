@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "title": "Pickleball Tournament",
+        "location": "College Gym",
+        "date": "2025-04-20",
+        "description": "Sports"
+      },
+      {
+        "id": 2,
+        "title": "Sunset Hike",
+        "location": "Mountain Trail",
+        "date": "2025-04-22",
+        "description": "Outdoors"
+      }, 
+      {
+        "id": 3,
+        "title": "Ochem study session :/",
+        "location": "MLC",
+        "date": "2025-04-24",
+        "description": "sad times"
+      }
+]

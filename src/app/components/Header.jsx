@@ -1,10 +1,8 @@
-import './Header.css';
 import Link from 'next/link';
 
 export default function Header() {
 
-    return <header className="App-header fixed top-0 w-full z-50">
-
+    return <header className="bg-[#E7625F] h-[90px] flex justify-between items-center px-6 fixed top-0 w-full z-50">
         <div className="flex items-center justify-center w-1/8">
             <Link href="/">
                 <img src="/logo.jpeg" className="h-[80px] rounded-full shadow-md" alt="logo" />
