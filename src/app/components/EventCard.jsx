@@ -1,13 +1,11 @@
+import Image from 'next/image';
+
 export default function EventCard(props) {
     return (
-        <div className="mb-3 shadow-lg rounded-lg overflow-hidden h-[280px]">
+        <div className="mb-3 shadow-lg rounded-lg overflow-hidden h-[280px] border-2 border-[#C85250]">
             <div className="flex h-full">
-                <div className="flex-1 w-2/5 h-full">
-                    <img
-                        src={props.img}
-                        alt={props.title}
-                        className="w-full h-full object-cover rounded-tl-lg rounded-bl-lg"
-                    />
+                <div className="flex-1 w-2/5 h-full relative">
+                    <Image src={props.img} alt={props.title} fill className="object-cover rounded-tl-lg rounded-bl-lg"/>
                 </div>
                 <div className="flex-1 w-3/5 p-4">
                     <div className="mb-2 text-center font-semibold text-xl">{props.title}                        
