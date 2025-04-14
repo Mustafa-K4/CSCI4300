@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "title": "Pickleball Tournament",
+        "location": "College Gym",
+        "date": "2025-04-20",
+        "description": "JHGBUvjdvhbdkvbdevbdjvjd",
+        "img": "https://media.cnn.com/api/v1/images/stellar/prod/rev-1-mcr-t3-0093-high-res-jpeg.jpg?c=16x9&q=h_833,w_1480,c_fill"
+      },
+      {
+        "id": 2,
+        "title": "Sunset Hike",
+        "location": "Mountain Trail",
+        "date": "2025-04-22",
+        "description": "ndhjcndhbjvdhbjjdvhbjjdvhbj",
+        "img": "https://cdn.frankerfacez.com/emoticon/712474/4"
+      }, 
+      {
+        "id": 3,
+        "title": "Ochem study session :/",
+        "location": "MLC",
+        "date": "2025-04-24",
+        "description": "sad times",
+        "img": "https://media.cnn.com/api/v1/images/stellar/prod/rev-1-mcr-t3-0093-high-res-jpeg.jpg?c=16x9&q=h_833,w_1480,c_fill"
+      },
+      {
+        "id": 2,
+        "title": "Sunset Hike",
+        "location": "Mountain Trail",
+        "date": "2025-04-22",
+        "description": "ndhjcndhbjvdhbjjdvhbjjdvhbj",
+        "img": "https://cdn.frankerfacez.com/emoticon/712474/4"
+      }
+]

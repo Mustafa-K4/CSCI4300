@@ -1,3 +1,5 @@
+Welcome to Go Outside — your go-to hub for finding and creating events around your college town. Whether you're into pickleball tournaments, scenic hikes, or chill movie nights, Go Outside makes it easy to connect with others and discover what’s happening nearby. Create your own listings, join events that interest you, and keep track of everything on your personal profile. It’s time to step out, meet new people, and make the most of your college experience.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
