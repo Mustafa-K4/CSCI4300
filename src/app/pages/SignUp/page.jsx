@@ -35,7 +35,7 @@ export default function SignUpPage() {
           <div className="flex justify-center mt-6">
             <button
               type="submit"
-              className="bg-black text-white px-8 py-2 rounded-full font-semibold hover:bg-opacity-80"
+              className="bg-black text-white px-8 py-2 rounded-full font-semibold hover:bg-opacity-80 cursor-pointer"
             >
               Sign Up
             </button>
@@ -52,6 +52,8 @@ export default function SignUpPage() {
     </div>
   );
 }
+
+
 
 
 
