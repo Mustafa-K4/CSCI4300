@@ -10,13 +10,9 @@ export default function RootLayout({
 }>) {
 
     return (
-        <html lang="en">
-            <body>
-                <main className="AppProfile">
-                    
-                    {children}
-                </main>
-            </body>
-        </html>
+            <main className="AppProfile">
+                
+                {children}
+            </main>
     );
 }
