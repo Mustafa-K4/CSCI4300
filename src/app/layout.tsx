@@ -13,7 +13,7 @@ export default function RootLayout({
       <body>
         <LoginProvider>
           <Header />
-          <main className="App flex-grow p-4 pt-24">
+          <main className="App flex-grow pt-20">
             {children}
           </main>
           <Footer />
