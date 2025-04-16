@@ -29,12 +29,7 @@ export default function Calendar() {
 
   const handleDayClick = (day) => {
     if (!day) return;
-    const selected = new Date(year, month, day);
-    setSelectedDate(selected.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }));
-  };
-
-  const closeModal = () => {
-    setSelectedDate(null);
+    
   };
 
     return ( 
@@ -61,7 +56,7 @@ export default function Calendar() {
                   year === currentDate.getFullYear();
 
                 return (
-                  <div
+                  <button 
                     key={idx}
                     className={`text-center py-2 border cursor-pointer rounded ${
                       isToday ? 'bg-blue-500 text-white' : 'hover:bg-gray-100'
@@ -69,7 +64,7 @@ export default function Calendar() {
                     onClick={() => day && handleDayClick(day)}
                   >
                     {day ?? ''}
-                  </div>
+                  </button>
                 );
               })}
             </div>

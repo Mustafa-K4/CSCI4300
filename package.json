@@ -11,6 +11,8 @@
   "dependencies": {
     "boostrap": "^2.0.0",
     "bootstrap": "^5.3.5",
+    "mongodb": "^6.15.0",
+    "mongoose": "^8.13.2",
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.9",
