@@ -2,7 +2,7 @@ import Link from "next/link";
 import connectMongoDB from "../../config/mongodb";
 
 export default function Home() {
-  connectMongoDB("users");
+  connectMongoDB("Users");
   
   return (
     <div className="min-h-[1400px] bg-cover bg-center bg-[url('/background.png')] text-white flex flex-col justify-end gap-8 p-8 pb-50 m-0">

@@ -1,24 +1,34 @@
-import mongoose from "mongoose";
+import mongoose, { Connection } from "mongoose";
 
+const connections: { [key: string]: Connection } = {};
 
-
-const connectDB = async (cluster: string): Promise<void> => {
+const connectDB = async (cluster: string): Promise<Connection | void> => {
  try {
     let uri = " ";
 
-    if (cluster == "events" && process.env.MONGODB_URI_EVENTS) {
+    if (cluster == "Events" && process.env.MONGODB_URI_EVENTS) {
       uri = process.env.MONGODB_URI_EVENTS;
-    } else if (cluster == "users" && process.env.MONGODB_URI_USERS) {
+    } else if (cluster == "Users" && process.env.MONGODB_URI_USERS) {
       uri = process.env.MONGODB_URI_USERS;
     }
+
+
 
     if (!uri) {
      throw new Error("MONGODB_URI is not defined in environment variables.");
     }
 
 
-    await mongoose.connect(uri);
-    console.log("Connected to MongoDB.");
+    if (connections[cluster]) {
+      console.log(`Reusing existing connection for cluster "${cluster}".`);
+      return connections[cluster];
+    }
+
+    const connection = await mongoose.createConnection(uri).asPromise();
+    connections[cluster] = connection;
+    console.log(`Connected to MongoDB cluster "${cluster}".`);
+    return connection;
+
   } catch (error) {
      console.log("Error connecting to MongoDB:", (error as Error).message);
   } 
