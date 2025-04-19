@@ -25,7 +25,7 @@ export default function EventCard(props) {
                         </div>
                     </div>
                     <div className="flex justify-end gap-2 mt-3">
-                        <button className="px-4 py-2 bg-black text-white rounded-lg hover:bg-[#D8DBCC] transition">
+                        <button className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-500">
                             Join Event!
                         </button>
                     </div>

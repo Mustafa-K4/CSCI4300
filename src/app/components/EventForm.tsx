@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 type EventProps = {
     addEvent: (newEvent: { name: string; location: string; description: string; imageUrl: string }) => void;
@@ -30,6 +31,22 @@ export default function EventForm({ addEvent }: EventProps) {
             imageUrl: '',
         });
     };
+
+    const searchParams = useSearchParams();
+    const nameParam = searchParams.get("name");
+    const locationParam = searchParams.get("address");
+    const descriptionParam = searchParams.get("venue");
+
+    useEffect(() => {
+        if (nameParam || locationParam || descriptionParam) {
+            setFormData(prev => ({
+                ...prev,
+                name: nameParam ?? prev.name,
+                location: locationParam ?? prev.location,
+                description: descriptionParam ?? prev.description,
+            }));
+        }
+    }, [nameParam, locationParam, descriptionParam]);    
 
     return (
         <div className="flex justify-center items-start min-h-screen py-2 mt-8">
