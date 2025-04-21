@@ -13,13 +13,16 @@ export default function ProfileGrid() {
             {dummyData.map((item, index) => (
                 <GridItem key={index}>
                     <ProfileCard 
-                        title={item.title}
+                        owner={item.owner}
+                        name={item.name}
                         location={item.location}
                         date={item.date}
                         description={item.description}
-                        img={item.img}
+                        imageUrl={item.imageUrl}
+                        startTime={item.startTime}
+                        endTime={item.endTime}
                     />
-                </GridItem>
+            </GridItem>
             ))}
         </div>
     )
