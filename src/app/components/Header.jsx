@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useLogin } from '../context/LoginContext'; // Adjust path if needed
+import { useLogin } from '../context/LoginContext'; 
 
 export default function Header() {
   const { isLoggedIn, logout } = useLogin();
