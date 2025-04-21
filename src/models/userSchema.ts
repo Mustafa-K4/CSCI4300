@@ -1,16 +1,11 @@
-import mongoose, { Schema, Document, Model } from 'mongoose';
 
-interface User extends Document {
-    name: string;
-    email: string;
-    password: string;
-}
+import mongoose from "mongoose";
 
-const eventSchema = new Schema<User>({
-    name: { type: String, required: true },
-    email: { type: String, required: true },
-    password: { type: String, required: true },
+const userSchema = new mongoose.Schema({
+  firstName: { type: String, required: true },
+  lastName:  { type: String, required: true },
+  email:     { type: String, required: true, unique: true },
+  password:  { type: String, required: true },
 });
 
-const Item: Model<User> = mongoose.models.Event || mongoose.model<User>('User', eventSchema);
-export default Item;
+export default userSchema;
