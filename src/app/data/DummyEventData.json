@@ -1,34 +1,42 @@
 [
     {
-        "id": 1,
-        "title": "Pickleball Tournament",
+        "owner": "Deez Nuts",
+        "startTime": "9:47 AM",
+        "endTime": "11:57 AM",
+        "name": "Pickleball Tournament",
         "location": "College Gym",
         "date": "2025-04-20",
-        "description": "JHGBUvjdvhbdkvbdevbdjvjd",
-        "img": "https://media.cnn.com/api/v1/images/stellar/prod/rev-1-mcr-t3-0093-high-res-jpeg.jpg?c=16x9&q=h_833,w_1480,c_fill"
+        "description": "JHGBUvjdvhbdkvbdevbdjvjdksdbdshjchsryuisdefvghbdjuniswdubvfyduiwmqswdenuvbfyhducwidmneuvfbhdcjunwimcenuvbfhdcuwixmcnvbfhdjcwikmxcnbvfhdjcwikxmcnvbfdciwxmcnhvvdjcskwxcjvhdjckxm",
+        "imageUrl": "https://media.cnn.com/api/v1/images/stellar/prod/rev-1-mcr-t3-0093-high-res-jpeg.jpg?c=16x9&q=h_833,w_1480,c_fill"
       },
       {
-        "id": 2,
-        "title": "Sunset Hike",
+        "owner": "Sugon",
+        "startTime": "9:47 PM",
+        "endTime": "11:57 PM",
+        "name": "Sunset Hike",
         "location": "Mountain Trail",
         "date": "2025-04-22",
         "description": "ndhjcndhbjvdhbjjdvhbjjdvhbj",
-        "img": "https://cdn.frankerfacez.com/emoticon/712474/4"
+        "imageUrl": "https://cdn.frankerfacez.com/emoticon/712474/4"
       }, 
       {
-        "id": 3,
-        "title": "Ochem study session :/",
+        "owner": "Donald Trump",
+        "startTime": "9:47 AM",
+        "endTime": "11:57 AM",
+        "name": "Ochem study session :/",
         "location": "MLC",
         "date": "2025-04-24",
         "description": "sad times",
-        "img": "https://media.cnn.com/api/v1/images/stellar/prod/rev-1-mcr-t3-0093-high-res-jpeg.jpg?c=16x9&q=h_833,w_1480,c_fill"
+        "imageUrl": "https://media.cnn.com/api/v1/images/stellar/prod/rev-1-mcr-t3-0093-high-res-jpeg.jpg?c=16x9&q=h_833,w_1480,c_fill"
       },
       {
-        "id": 2,
-        "title": "Sunset Hike",
+        "owner": "Ur Mom",
+        "startTime": "10:47 AM",
+        "endTime": "10:57 AM",
+        "name": "Sunset Hike",
         "location": "Mountain Trail",
         "date": "2025-04-22",
         "description": "ndhjcndhbjvdhbjjdvhbjjdvhbj",
-        "img": "https://cdn.frankerfacez.com/emoticon/712474/4"
+        "imageUrl": "https://cdn.frankerfacez.com/emoticon/712474/4"
       }
 ]

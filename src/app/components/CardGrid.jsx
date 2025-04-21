@@ -50,7 +50,7 @@ export default function CardGrid() {
                                 <li>
                                     <button type="button" className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                     onClick={() => {
-                                        setCat('title');
+                                        setCat('name');
                                         setSelectedLabel('Search by Title');
                                         setDropdownOpen(false);
                                     }}
@@ -102,11 +102,14 @@ export default function CardGrid() {
             {filteredEvents.map((item, index) => (
                 <GridItem key={index}>
                     <EventCard 
-                        title={item.title}
+                        owner={item.owner}
+                        name={item.name}
                         location={item.location}
                         date={item.date}
                         description={item.description}
-                        img={item.img}
+                        imageUrl={item.imageUrl}
+                        startTime={item.startTime}
+                        endTime={item.endTime}
                     />
                 </GridItem>
             ))}
