@@ -12,7 +12,7 @@ export default function CardGrid() {
     const [searchInfo, setInfo] = useState('');
     const [filteredEvents, setFilteredEvents] = useState(dummyData);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
-    const [searchCategory, setCat] = useState('title');
+    const [searchCategory, setCat] = useState('name');
     const [selectedLabel, setSelectedLabel] = useState('Search by Title');
 
     const updateEventsAfterSearch = (value) => {
