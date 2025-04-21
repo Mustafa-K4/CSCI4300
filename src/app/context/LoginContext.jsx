@@ -6,7 +6,6 @@ const LoginContext = createContext();
 export const LoginProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Load login state from localStorage on mount
   useEffect(() => {
     const storedLogin = localStorage.getItem('isLoggedIn');
     if (storedLogin === 'true') {
@@ -14,9 +13,10 @@ export const LoginProvider = ({ children }) => {
     }
   }, []);
 
-  const login = () => {
+  const login = (token) => {
     setIsLoggedIn(true);
     localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('token', token);
   };
 
   const logout = () => {
@@ -32,5 +32,7 @@ export const LoginProvider = ({ children }) => {
 };
 
 export const useLogin = () => useContext(LoginContext);
+
+
 
 
