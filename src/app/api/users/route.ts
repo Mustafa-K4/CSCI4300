@@ -34,7 +34,9 @@ import bcrypt from "bcryptjs";
 export async function POST(request) {
   try {
     const conn = await connectDB("Users");
-
+    if (!conn) {
+      return NextResponse.json({ error: "Database connection failed" }, { status: 500 });
+    }
     const User = conn.models.User || conn.model("User", userSchema);
 
     const { firstName, lastName, email, password } = await request.json();
