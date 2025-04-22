@@ -1,11 +1,17 @@
 import Image from 'next/image';
 
 export default function EventCard(props) {
+    const formattedDate = new Date(props.date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      
     return (
         <div className="mb-3 shadow-lg rounded-lg overflow-hidden h-[320px] border-2 border-[#C85250]">
             <div className="flex h-full">
                 <div className="flex-1 w-2/5 h-full relative">
-                    <Image src={props.imageUrl} alt={props.name} fill className="object-cover rounded-tl-lg rounded-bl-lg"/>
+                    <Image src={props.imageUrl || "https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg"} alt={props.name} fill className="object-cover rounded-tl-lg rounded-bl-lg"/>
                 </div>
                 <div className="flex-1 w-3/5 p-4">
                     <div className="mb-2 text-center font-semibold text-xl">
@@ -17,7 +23,7 @@ export default function EventCard(props) {
                         </div>
                         <div className="mb-2">
                             <div className="font-semibold">Date and Time:</div>
-                            <div>{props.date} @ {props.startTime} - {props.endTime || "TBD"}</div>
+                            <div>{formattedDate} @ {props.startTime} - {props.endTime || "TBD"}</div>
                         </div>
                         <div className="mb-2">
                             <div className="font-semibold">Location:</div>

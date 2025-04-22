@@ -1,6 +1,5 @@
 'use client';
 import EventCard from "./EventCard";
-import dummyData from "../data/DummyEventData.json"; 
 import React, { useEffect, useState } from 'react';
 
 export default function CardGrid() {
@@ -19,11 +18,25 @@ export default function CardGrid() {
 
     const updateEventsAfterSearch = (value) => {
         const lowercasedValue = value.toLowerCase();
-        const filtered = allEvents.filter(event =>
-            event[searchCategory].toLowerCase().includes(lowercasedValue)
-        );
+    
+        const filtered = allEvents.filter(event => {
+            if (searchCategory === 'date') {
+                // Format event.date to something like "April 20, 2025"
+                const formattedDate = new Date(event.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                }).toLowerCase();
+    
+                return formattedDate.includes(lowercasedValue);
+            }
+    
+            return event[searchCategory].toLowerCase().includes(lowercasedValue);
+        });
+    
         setFilteredEvents(filtered);
-    }; 
+    };
+    
     
     const getAllEvents = async () => {
         try {
@@ -84,10 +97,10 @@ export default function CardGrid() {
                                     <button type="button" className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                     onClick={() => {
                                         setCat('date');
-                                        setSelectedLabel('Search by Date (yyyy-mm-dd)');
+                                        setSelectedLabel('Search by Date (Month Day, Year)');
                                         setDropdownOpen(false);
                                     }}
-                                    > Search by Date (yyyy-mm-dd) </button>
+                                    > Search by Date (Month Day, Year) </button>
                                 </li>
                                 <li>
                                     <button type="button" className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"

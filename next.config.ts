@@ -1,10 +1,15 @@
-import type { NextConfig } from "next";
+// next.config.js
 
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
-    domains: ['cdn.frankerfacez.com', 'media.cnn.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
-
 };
 
-export default nextConfig;
+module.exports = nextConfig;
