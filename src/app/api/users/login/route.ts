@@ -1,48 +1,10 @@
-/*import connectDB from "../../../../../config/mongodb";
-import User from "@/models/userSchema";
 import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-
-const JWT_SECRET = process.env.JWT_SECRET || "devsecretkey";
-
-export async function POST(request: NextRequest) {
-    try {
-        await connectDB("Users");
-
-        const { email, password } = await request.json();
-
-        const user = await User.findOne({ email });
-        if (!user) {
-            return NextResponse.json({ error: "User not found" }, { status: 404 });
-        }
-
-        const isValid = await bcrypt.compare(password, user.password);
-        if (!isValid) {
-            return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
-        }
-
-        const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "1d" });
-
-        return NextResponse.json({
-            token,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-        }, { status: 200 });
-    } catch (error) {
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
-    }
-}*/
-
-// src/app/api/users/login/route.ts
-import { NextResponse } from "next/server";
 import connectDB from "../../../../../config/mongodb";
 import userSchema from "../../../../models/userSchema";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken"; // JWT package for token generation
 
-export async function POST(request) {
+export async function POST(request : NextRequest) {
   try {
     const conn = await connectDB("Users");
 
