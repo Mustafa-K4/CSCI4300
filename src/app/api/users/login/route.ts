@@ -46,6 +46,10 @@ export async function POST(request) {
   try {
     const conn = await connectDB("Users");
 
+    if (!conn) {
+      return NextResponse.json({ error: "Database connection failed" }, { status: 500 });
+    }
+
     const User = conn.models.User || conn.model("User", userSchema);
 
     const { email, password } = await request.json();
@@ -63,6 +67,10 @@ export async function POST(request) {
     }
 
     // 3. Create a JWT token
+    if (!process.env.JWT_SECRET) {
+      throw new Error("JWT_SECRET is not defined in the environment variables");
+    }
+
     const token = jwt.sign(
       { userId: user._id, email: user.email },
       process.env.JWT_SECRET, // make sure to define this secret in your .env file
