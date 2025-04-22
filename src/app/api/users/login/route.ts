@@ -52,7 +52,7 @@ export async function POST(request) {
 
     const User = conn.models.User || conn.model("User", userSchema);
 
-    const { email, password } = await request.json();
+    const { email, password, events } = await request.json();
 
     // 1. Check if user exists
     const user = await User.findOne({ email });
@@ -72,11 +72,13 @@ export async function POST(request) {
     }
 
     const token = jwt.sign(
-      { userId: user._id, email: user.email },
+      { userId: user._id, email: user.email, events: user.events },
       process.env.JWT_SECRET, // make sure to define this secret in your .env file
       { expiresIn: "1h" } // Token expiration time
     );
 
+    localStorage.setItem("authToken", token);
+    
     // 4. Return the token as a response
     return NextResponse.json({ message: "Login successful", token }, { status: 200 });
 
