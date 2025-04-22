@@ -20,7 +20,6 @@ const eventSchema = new Schema<Event>({
     imageUrl: { type: String, required: false },
     startTime: { type: String, required: true },
     endTime: { type: String, required: false }
-    
 });
 
 const Item: Model<Event> = mongoose.models.Event || mongoose.model<Event>('Event', eventSchema);
