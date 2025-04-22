@@ -1,10 +1,12 @@
 'use client';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const LoginContext = createContext();
 
 export const LoginProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const storedLogin = localStorage.getItem('isLoggedIn');
@@ -19,10 +21,15 @@ export const LoginProvider = ({ children }) => {
     localStorage.setItem('token', token);
   };
 
-  const logout = () => {
+  const logout = async () => {
     setIsLoggedIn(false);
     localStorage.setItem('isLoggedIn', 'false');
+    await fetch("/api/users/logout", {
+      method: "POST",
+    });
+    router.push("/pages/SignIn");
   };
+  
 
   return (
     <LoginContext.Provider value={{ isLoggedIn, login, logout }}>

@@ -39,10 +39,19 @@ export async function POST(request : NextRequest) {
       { expiresIn: "1h" } // Token expiration time
     );
 
-    localStorage.setItem("authToken", token);
-    
-    // 4. Return the token as a response
-    return NextResponse.json({ message: "Login successful", token }, { status: 200 });
+
+    //localStorage.setItem("authToken", token);
+    const response = NextResponse.json({ message: "Login successful" });
+
+    response.cookies.set("authToken", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60, 
+    });
+
+    return response;
 
   } catch (err) {
     console.error("🔥 Login error:", err);
