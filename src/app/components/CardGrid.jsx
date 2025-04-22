@@ -9,19 +9,43 @@ export default function CardGrid() {
         {children}
         </div>
     );
+    const [allEvents, setEvents] = useState([]);
     const [searchInfo, setInfo] = useState('');
-    const [filteredEvents, setFilteredEvents] = useState(dummyData);
+    const [filteredEvents, setFilteredEvents] = useState([]);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const [searchCategory, setCat] = useState('name');
     const [selectedLabel, setSelectedLabel] = useState('Search by Title');
+    const [isLoading, setIsLoading] = useState(true);
 
     const updateEventsAfterSearch = (value) => {
         const lowercasedValue = value.toLowerCase();
-        const filtered = dummyData.filter(event =>
+        const filtered = allEvents.filter(event =>
             event[searchCategory].toLowerCase().includes(lowercasedValue)
         );
         setFilteredEvents(filtered);
-    };             
+    }; 
+    
+    const getAllEvents = async () => {
+        try {
+            setIsLoading(true);
+            const response = await fetch('/api/events');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            } 
+            const data = await response.json();
+            setEvents(data.Events);
+            setFilteredEvents(data.Events);
+        } catch (error) {
+            console.error('Error fetching events:', error);
+            throw error;
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        getAllEvents();
+    }, []);
 
     return (     
         <div> 
@@ -99,20 +123,24 @@ export default function CardGrid() {
                     }}
                 >Reset Search Settings</button>
             </div>
-            {filteredEvents.map((item, index) => (
-                <GridItem key={index}>
-                    <EventCard 
-                        owner={item.owner}
-                        name={item.name}
-                        location={item.location}
-                        date={item.date}
-                        description={item.description}
-                        imageUrl={item.imageUrl}
-                        startTime={item.startTime}
-                        endTime={item.endTime}
-                    />
-                </GridItem>
-            ))}
+            {isLoading ? (
+                <div className="text-center text-white">Loading events...</div>
+            ) : (
+                filteredEvents.map((item, index) => (
+                    <GridItem key={index}>
+                        <EventCard 
+                            owner={item.owner}
+                            name={item.name}
+                            location={item.location}
+                            date={item.date}
+                            description={item.description}
+                            imageUrl={item.imageUrl}
+                            startTime={item.startTime}
+                            endTime={item.endTime}
+                        />
+                    </GridItem>
+                ))
+            )}
         </div>
     )
 }
