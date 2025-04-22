@@ -4,9 +4,25 @@ const connections: { [key: string]: Connection } = {};
 
 const connectDB = async (cluster: string): Promise<Connection | void> => {
  try {
-    let uri = " ";
+    const uri = process.env.MONGODB_URI;
 
-    if (cluster == "Events" && process.env.MONGODB_URI_EVENTS) {
+    if (!uri) {
+      throw new Error("MONGODB_URI is not defined in environment variables.");
+    }
+
+    if (cluster == "Events") {
+      const conn = await mongoose.connect(uri);
+      const connection = mongoose.connection.useDb("Events");
+      console.log("Connected to MongoDB cluster Events.");
+      return connection;
+    } else if (cluster == "Users") {
+      const conn = await mongoose.connect(uri);
+      const connection = mongoose.connection.useDb("Users");
+      console.log("Connected to MongoDB cluster Users.");
+      return connection;
+    }
+
+    /*if (cluster == "Events" && process.env.MONGODB_URI_EVENTS) {
       uri = process.env.MONGODB_URI_EVENTS;
     } else if (cluster == "Users" && process.env.MONGODB_URI_USERS) {
       uri = process.env.MONGODB_URI_USERS;
@@ -27,11 +43,13 @@ const connectDB = async (cluster: string): Promise<Connection | void> => {
     const connection = await mongoose.createConnection(uri).asPromise();
     connections[cluster] = connection;
     console.log(`Connected to MongoDB cluster "${cluster}".`);
-    return connection;
+    return connection;*/
 
   } catch (error) {
      console.log("Error connecting to MongoDB:", (error as Error).message);
   } 
+
+     
 };
 
 
