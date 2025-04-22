@@ -1,5 +1,4 @@
 import Link from "next/link";
-import connectMongoDB from "../../config/mongodb";
 
 export default function Home() {
 

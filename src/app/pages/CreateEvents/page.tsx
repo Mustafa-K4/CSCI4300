@@ -1,5 +1,5 @@
 'use client'
-import EventForm from "../../components/EventForm.tsx";
+import EventForm from "../../components/EventForm";
 import {useContext}from "react";
 import LoginContext, { useLogin } from "../../context/LoginContext.jsx";
 
@@ -9,8 +9,8 @@ export default function CreatePage() {
     if (loginVar().isLoggedIn) {
         return ( 
             <>
-                <div>
-                <EventForm addEvent={(event) => console.log(event) }></EventForm>
+               <div>
+                    <EventForm/>
                 </div>
             </>
         );

@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 
 const Event = mongoose.models.Event || mongoose.model("Event", eventSchema);
 
-export async function GET(request: NextRequest) {
+export async function GET() {
     await connectDB("Events");
     const Events = await Event.find();
     return NextResponse.json({Events}, {status: 200});

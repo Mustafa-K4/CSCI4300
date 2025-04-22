@@ -1,37 +1,9 @@
-/*import connectDB from "../../../../config/mongodb";
-import User from "../../../models/userSchema";
 import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
-
-export async function POST(request: NextRequest) {
-    try {
-        await connectDB("Users");
-
-        const { firstName, lastName, email, password } = await request.json();
-
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return NextResponse.json({ error: "User already exists" }, { status: 400 });
-        }
-
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        const newUser = new User({ firstName, lastName, email, password: hashedPassword });
-        await newUser.save();
-
-        return NextResponse.json({ message: "User registered successfully" }, { status: 201 });
-    } catch (error) {
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
-    }
-}*/
-
-// src/app/api/users/route.ts
-import { NextResponse } from "next/server";
 import connectDB from "../../../../config/mongodb";
 import userSchema from "../../../models/userSchema";
 import bcrypt from "bcryptjs";
 
-export async function POST(request) {
+export async function POST(request : NextRequest) {
   try {
     const conn = await connectDB("Users");
     if (!conn) {
