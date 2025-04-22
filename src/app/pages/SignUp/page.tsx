@@ -12,14 +12,14 @@ export default function SignUpPage() {
 
   const [message, setMessage] = useState('');
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setMessage('');
 
@@ -40,7 +40,7 @@ export default function SignUpPage() {
         setMessage(`${data.error || 'Sign up failed.'}`);
       }
     } catch (err) {
-      setMessage('Something went wrong.');
+      setMessage('Something went wrong.' + err);
     }
   };
 
