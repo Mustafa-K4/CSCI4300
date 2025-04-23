@@ -37,7 +37,33 @@ export default function ProfileCard(props) {
         }
     };
 
+    const handleDeleteEvent = async () => {
+        if (!eventId) {
+            console.error("Event ID is missing");
+            return;
+        }
 
+        try {
+            handleLeaveEvent();
+
+            const response = await fetch(`/api/events/${eventId}`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to delete event");
+            }
+
+            console.log("Event deleted successfully");
+            alert("Event deleted successfully!");
+
+            onRemove(eventId);
+        } catch (error) {
+            console.error("Error deleting event:", error);
+            alert("Failed to delete event.");
+        }
+    };
 
     useEffect(() => {
         checkOwnership();
@@ -151,6 +177,15 @@ export default function ProfileCard(props) {
                                 
                             </button>
                         )}
+                        { isOwner && (
+                            <button
+                            className="px-4 py-2 bg-red-700 text-white rounded-lg hover:bg-red-500 transition"
+                            onClick={handleDeleteEvent}
+                            >
+                                Delete Event
+                            </button>
+                        )}
+
                     </div>
                 </div>
             </div>

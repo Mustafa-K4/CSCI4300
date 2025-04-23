@@ -84,8 +84,6 @@ export default function ProfileGrid() {
         */
     }
 
-    
-
     const GridItem = ({ children }) => (
         <div>
             {children}

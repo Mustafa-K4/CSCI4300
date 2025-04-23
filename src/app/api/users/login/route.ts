@@ -3,7 +3,7 @@ import connectDB from "../../../../../config/mongodb";
 import userSchema from "../../../../models/userSchema";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken"; // JWT package for token generation
-import Cookies from 'js-cookie';
+
 
 export async function POST(request : NextRequest) {
   try {
