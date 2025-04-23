@@ -2,9 +2,35 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useLogin } from '../context/LoginContext'; 
+import { useEffect, useState } from 'react';
 
 export default function Header() {
-  const { isLoggedIn, logout } = useLogin();
+  const { userEmail, isLoggedIn, logout } = useLogin();
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    const fetchUserName = async () => {
+      if (!userEmail) return;
+
+      try {
+        const response = await fetch(`/api/users/name/${userEmail}`, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch user name');
+        }
+
+        const data = await response.json();
+        setUserName(data.name); 
+      } catch (error) {
+        console.error('Error fetching user name:', error);
+      }
+    };
+
+    fetchUserName();
+  }, [userEmail]);
 
   return (
     <header className="bg-[#E7625F] h-[90px] flex justify-between items-center px-6 fixed top-0 w-full z-50">
@@ -14,7 +40,9 @@ export default function Header() {
         </Link>
       </div>
       <div className="w-1/4 text-center flex items-center">
-        <h1 className="text-4xl font-bold text-gray-800">Welcome!</h1>
+        <h1 className="text-4xl font-bold text-gray-800">
+          {isLoggedIn ? `Welcome, ${userName}!` : 'Welcome!'}
+        </h1>
       </div>
       <nav className="w-5/8 flex justify-end mr-4">
         <ul className="flex gap-3 items-center">
