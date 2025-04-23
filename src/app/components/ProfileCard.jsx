@@ -1,9 +1,47 @@
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function ProfileCard(props) {
     const email = props.email; 
     const eventId = props.eventId; 
     const onRemove = props.onRemove;
+    const [isOwner, setIsOwner] = useState(false);
+
+    const router = useRouter();
+
+    
+    const goToPEdit = () => {
+        router.push(`/pages/EditEvent?eventId=${eventId}`);
+    };
+
+    const checkOwnership = async () => {
+        try {
+            const response = await fetch(`/api/users/name/${email}`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch user name");
+            }
+
+            const data = await response.json();
+            console.log("Fetched user name:", data.name);
+
+            if (props.owner === data.name) {
+                setIsOwner(true);
+            }
+        } catch (error) {
+            console.error("Error checking ownership:", error);
+        }
+    };
+
+
+
+    useEffect(() => {
+        checkOwnership();
+    }, [email]);
 
     const handleLeaveEvent = async () => {
         if (!email || !eventId) {
@@ -52,7 +90,7 @@ export default function ProfileCard(props) {
             console.error("Error removing event:", error);
         }
     };
-
+    
     const formattedDate = new Date(props.date).toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
@@ -104,6 +142,15 @@ export default function ProfileCard(props) {
                         >
                             Leave Event
                         </button>
+                        {isOwner && (
+                            <button
+                                className="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-500 transition"
+                                onClick={goToPEdit}
+                            >
+                                Edit Event
+                                
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>

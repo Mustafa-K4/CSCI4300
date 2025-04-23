@@ -44,4 +44,30 @@ export async function DELETE (request: NextRequest, { params }: RouteParams) {
     }
     return NextResponse.json({ message: "Item deleted" }, { status: 200 });
 }
-   
+
+export async function PUT(request: NextRequest, { params }: RouteParams) {
+  const { id } = params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+      return NextResponse.json({ message: "Invalid ID format" }, { status: 400 });
+  }
+
+  const { name, date, location, description, imageUrl, startTime, endTime } = await request.json();
+  await connectDB("Events");
+
+  try {
+      const updatedEvent = await Event.findByIdAndUpdate(
+          id,
+          { name, date, location, description, imageUrl, startTime, endTime },
+          { new: true, runValidators: true } // `new: true` returns the updated document
+      );
+
+      if (!updatedEvent) {
+          return NextResponse.json({ message: "Event not found" }, { status: 404 });
+      }
+
+      return NextResponse.json({ message: "Event updated successfully", event: updatedEvent }, { status: 200 });
+  } catch (error) {
+      console.error("Error updating event:", error);
+      return NextResponse.json({ error: "Failed to update event" }, { status: 500 });
+  }
+}
