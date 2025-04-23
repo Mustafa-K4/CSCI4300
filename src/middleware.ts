@@ -13,7 +13,7 @@ const middleware = (request: NextRequest) => {
 
 export const config = {
     matcher: [
-        '/pages/CreateEvents/:path*', '/pages/Profile/:path*'
+        '/pages/CreateEvents/:path*', '/pages/Profile/:path*', '/pages/EditEvent/:path*'
     ]
 };
 
