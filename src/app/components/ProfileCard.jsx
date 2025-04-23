@@ -10,48 +10,25 @@ export default function ProfileCard(props) {
             console.error("Email or event ID is missing");
             return;
         }
-
+    
         try {
-            
-            const response = await fetch(`/api/users/events/${email}`, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
+            const response = await fetch(`/api/users/events/${email}/${eventId}`, {
+                method: "DELETE",
             });
-
+    
             if (!response.ok) {
-                throw new Error("Failed to fetch user events");
+                throw new Error("Failed to delete event");
             }
-
-            const data = await response.json();
-            const eventIds = data.events.split(","); 
-            console.log("Current event IDs:", eventIds);
-
-           
-            const updatedEventIds = eventIds.filter((id) => id !== eventId);
-            console.log("Updated event IDs:", updatedEventIds);
-
-            const updatedEventsString = updatedEventIds.join(",");
-
-            const postResponse = await fetch(`/api/users/events/${email}`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ events: updatedEventsString }),
-            });
-
-            if (!postResponse.ok) {
-                throw new Error("Failed to update user events");
-            }
-
-            console.log("User events updated successfully");
-
-
-            onRemove(eventId); 
-
-
+    
+            console.log("User event deleted successfully from backend");
+    
+            // Notify parent to update UI
+            onRemove(eventId);
         } catch (error) {
-            console.error("Error removing event:", error);
+            console.error("Error deleting event:", error);
         }
     };
+    
 
     const formattedDate = new Date(props.date).toLocaleDateString("en-US", {
         year: "numeric",
@@ -100,7 +77,7 @@ export default function ProfileCard(props) {
                     <div className="flex justify-end gap-2 mt-3">
                         <button
                             className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-500 transition"
-                            onClick={handleLeaveEvent} 
+                            onClick={onRemove} 
                         >
                             Leave Event
                         </button>

@@ -7,7 +7,6 @@ export default function ProfileGrid() {
     const { userEmail } = useLogin(); // Access the user's email
     const [userEvents, setUserEvents] = useState([]); 
     const [isLoading, setIsLoading] = useState(true); 
-    const [renderedEvents, setRenderedEvents] = useState([]);
 
     
     const fetchUserEvents = async () => {
@@ -43,11 +42,9 @@ export default function ProfileGrid() {
 
             if (eventIds[0] === "") {
                 setUserEvents([]);
-                setRenderedEvents([]);
             } else {
                 console.log("Fetched event details:", eventDetails); // Log the fetched event details for debugging
                 setUserEvents(eventDetails); 
-                setRenderedEvents(eventDetails);
             }
             
         } catch (error) {
@@ -65,27 +62,13 @@ export default function ProfileGrid() {
         fetchUserEvents(); 
     }, [userEmail]);
 
-    const handleRemoveEvent = (eventId) => {
+    const handleRemoveEvent = async (eventId) => {
         const updatedEvents = userEvents.filter(event => {
             event._id !== eventId;
         });
         setUserEvents(updatedEvents);
-         /*setUserEvents((prevEvents) => {
-            const updatedEvents = prevEvents.filter((event) => event._id !== eventId);
-            console.log("Updated userEvents:", updatedEvents); // Debug log
-            return updatedEvents;
-        });
-        setRenderedEvents((prevEvents) => {
-            const updatedRenderedEvents = prevEvents.filter((event) => event._id !== eventId);
-            console.log("Updated renderedEvents:", updatedRenderedEvents); // Debug log
-            return updatedRenderedEvents;
-        });
-        console.log("Event removed:", eventId); // Debug log
-        */
-    }
-
+    };
     
-
     const GridItem = ({ children }) => (
         <div>
             {children}

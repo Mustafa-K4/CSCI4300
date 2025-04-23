@@ -55,3 +55,34 @@ export async function POST(request: NextRequest, { params }: { params: { email: 
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }
+
+export async function DELETE(request: NextRequest, { params }: { params: { email: string; eventId: string } }) {
+    const { email, eventId } = params;
+
+    try {
+        const conn = await connectDB("Users");
+        if (!conn) {
+            return NextResponse.json({ error: "Database connection failed" }, { status: 500 });
+        }
+
+        const User = conn.models.User || conn.model("User", userSchema);
+
+        const user = await User.findOne({ email });
+        if (!user) {
+            return NextResponse.json({ error: "User not found" }, { status: 404 });
+        }
+
+        const updatedEvents = user.events
+            .split(",")
+            .filter(id => id !== eventId)
+            .join(",");
+
+        user.events = updatedEvents;
+        await user.save();
+
+        return NextResponse.json({ message: "Event removed from user successfully" }, { status: 200 });
+    } catch (error) {
+        console.error("Error removing event from user:", error);
+        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    }
+}
