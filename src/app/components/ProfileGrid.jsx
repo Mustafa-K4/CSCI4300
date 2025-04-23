@@ -80,8 +80,6 @@ export default function ProfileGrid() {
         console.log("Event removed:", eventId); // Debug log
     }
 
-    
-
     const GridItem = ({ children }) => (
         <div>
             {children}
