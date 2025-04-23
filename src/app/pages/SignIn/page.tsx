@@ -24,6 +24,7 @@ export default function SignInPage() {
     e.preventDefault();
     setError('');
 
+    console.log ('Form data before submission:', formData);
     try {
       const res = await fetch('/api/users/login', {
         method: 'POST',
@@ -33,14 +34,18 @@ export default function SignInPage() {
 
       const data = await res.json();
 
+      console.log('Response status:', res.status);
+      console.log('Response data:', data);
+
       if (!res.ok) {
         setError(data.error || 'Something went wrong');
         return;
       }
 
+      console.log('Login successful:', data);
       // Call context login (you can customize it to store token/user info)
       login(data.token);
-
+      
       // Redirect to homepage
       window.location.href = '/';
     } catch (err) {

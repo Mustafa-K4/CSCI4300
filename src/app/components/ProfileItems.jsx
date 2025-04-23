@@ -10,7 +10,7 @@ export default function ProfileItems() {
     return (
         <div>
             <div className="mx-20 bg-red-200 p-4 rounded-lg shadow-lg mt-4 text-2xl">
-                Today's Events:
+                Ordered Events:
             </div>
             <div className = "mx-20 bg-red-300"> 
                 <ProfileGrid></ProfileGrid>

@@ -11,7 +11,7 @@ export default function ProfilePage() {
                 <div>
                     <h1 className="text-4xl font-bold mb-2 text-center mt-6">User's Events</h1>
                 </div>
-                <Calendar></Calendar>
+
                 <ProfileItems></ProfileItems>
             </>
         ); 

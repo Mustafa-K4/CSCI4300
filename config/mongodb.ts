@@ -13,37 +13,14 @@ const connectDB = async (cluster: string): Promise<Connection | void> => {
     if (cluster == "Events") {
       const conn = await mongoose.connect(uri);
       const connection = mongoose.connection.useDb("Events");
-      console.log("Connected to MongoDB cluster Events.");
+      console.log("Connected to MongoDB database Events.");
       return connection;
     } else if (cluster == "Users") {
       const conn = await mongoose.connect(uri);
       const connection = mongoose.connection.useDb("Users");
-      console.log("Connected to MongoDB cluster Users.");
+      console.log("Connected to MongoDB database Users.");
       return connection;
     }
-
-    /*if (cluster == "Events" && process.env.MONGODB_URI_EVENTS) {
-      uri = process.env.MONGODB_URI_EVENTS;
-    } else if (cluster == "Users" && process.env.MONGODB_URI_USERS) {
-      uri = process.env.MONGODB_URI_USERS;
-    }
-
-
-
-    if (!uri) {
-     throw new Error("MONGODB_URI is not defined in environment variables.");
-    }
-
-
-    if (connections[cluster]) {
-      console.log(`Reusing existing connection for cluster "${cluster}".`);
-      return connections[cluster];
-    }
-
-    const connection = await mongoose.createConnection(uri).asPromise();
-    connections[cluster] = connection;
-    console.log(`Connected to MongoDB cluster "${cluster}".`);
-    return connection;*/
 
   } catch (error) {
      console.log("Error connecting to MongoDB:", (error as Error).message);

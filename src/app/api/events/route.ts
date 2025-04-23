@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import mongoose from 'mongoose';
 
-const Event = mongoose.models.Event || mongoose.model("Event", eventSchema);
+const Event = mongoose.models.Event || mongoose.model("Event", eventSchema.schema);
 
 export async function GET() {
     await connectDB("Events");
