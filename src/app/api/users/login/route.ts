@@ -3,6 +3,7 @@ import connectDB from "../../../../../config/mongodb";
 import userSchema from "../../../../models/userSchema";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken"; // JWT package for token generation
+import Cookies from 'js-cookie';
 
 export async function POST(request : NextRequest) {
   try {
@@ -41,10 +42,10 @@ export async function POST(request : NextRequest) {
 
 
     //localStorage.setItem("authToken", token);
-    const response = NextResponse.json({ message: "Login successful" });
+    const response = NextResponse.json({ message: "Login successful", token });
 
     response.cookies.set("authToken", token, {
-      httpOnly: true,
+      httpOnly: false,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       path: "/",

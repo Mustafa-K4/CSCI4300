@@ -1,8 +1,17 @@
 'use client';
 import EventCard from "./EventCard";
 import React, { useEffect, useState } from 'react';
+import { useLogin } from '../context/LoginContext';
+import jwt from 'jsonwebtoken';
+import { NextRequest, NextResponse } from 'next/server';
+import Cookies from 'js-cookie';
+import { on } from "events";
 
 export default function CardGrid() {
+
+    const { userEmail} = useLogin(); // Access context values
+    //console.log(userEmail); // Log the values for debugging
+
     const GridItem = ({ children }) => (
         <div>
         {children}
@@ -15,6 +24,27 @@ export default function CardGrid() {
     const [searchCategory, setCat] = useState('name');
     const [selectedLabel, setSelectedLabel] = useState('Search by Title');
     const [isLoading, setIsLoading] = useState(true);
+    const [userEvents, setUserEvents] = useState([]);
+
+    const fetchUserEvents = async () => {
+        const response = await fetch(`/api/users/events/${userEmail}`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch user events');
+        }
+
+        const data = await response.json();
+        setUserEvents(data.events);
+    }
+
+    useEffect(() => {
+        if (userEmail) {
+            fetchUserEvents(); // Fetch events when the user is logged in and email is available
+        }
+    }, [userEmail]);
 
     const updateEventsAfterSearch = (value) => {
         const lowercasedValue = value.toLowerCase();
@@ -37,7 +67,39 @@ export default function CardGrid() {
         setFilteredEvents(filtered);
     };
     
-    
+    const joinEvent = async (eventId, Email) => {
+
+        const tempEmail = Email;
+        if (!tempEmail) {
+            console.error("User email is not available");
+            return;
+        }
+
+        try {
+            
+            const updatedEvents = userEvents
+                ? `${userEvents},${eventId}` 
+                : `${eventId}`; 
+
+            setUserEvents(updatedEvents); // Update the local state
+
+            // Send a POST request to update the user's events
+            const response = await fetch(`/api/users/events/${userEmail}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ events: updatedEvents }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update user events');
+            }
+
+            console.log('User events updated successfully');
+        } catch (error) {
+            console.error('Error updating user events:', error);
+        }
+    };
+
     const getAllEvents = async () => {
         try {
             setIsLoading(true);
@@ -59,6 +121,8 @@ export default function CardGrid() {
     useEffect(() => {
         getAllEvents();
     }, []);
+
+    
 
     return (     
         <div> 
@@ -150,6 +214,8 @@ export default function CardGrid() {
                             imageUrl={item.imageUrl}
                             startTime={item.startTime}
                             endTime={item.endTime}
+                            email = {userEmail}
+                            buttonHandler= {() => joinEvent(item._id, userEmail)}
                         />
                     </GridItem>
                 ))
