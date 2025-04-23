@@ -66,18 +66,22 @@ export default function ProfileGrid() {
     }, [userEmail]);
 
     const handleRemoveEvent = (eventId) => {
-        setUserEvents((prevEvents) => {
+        const updatedEvents = userEvents.filter(event => {
+            event._id !== eventId;
+        });
+        setUserEvents(updatedEvents);
+         /*setUserEvents((prevEvents) => {
             const updatedEvents = prevEvents.filter((event) => event._id !== eventId);
             console.log("Updated userEvents:", updatedEvents); // Debug log
             return updatedEvents;
         });
-
         setRenderedEvents((prevEvents) => {
             const updatedRenderedEvents = prevEvents.filter((event) => event._id !== eventId);
             console.log("Updated renderedEvents:", updatedRenderedEvents); // Debug log
             return updatedRenderedEvents;
         });
         console.log("Event removed:", eventId); // Debug log
+        */
     }
 
     
